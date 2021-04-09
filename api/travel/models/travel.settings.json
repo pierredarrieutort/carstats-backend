@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "travels",
+  "info": {
+    "name": "travel"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "travels"
+    },
+    "route": {
+      "type": "json"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "users_global_stats",
+  "info": {
+    "name": "usersGlobalStat",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "userId": {
+      "unique": true,
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "vMax": {
+      "type": "float",
+      "min": 0,
+      "default": 0
+    },
+    "vMoy": {
+      "type": "float",
+      "min": 0
+    },
+    "totalDistance": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "totalTravelDuration": {
+      "type": "biginteger",
+      "min": "0",
+      "default": "0"
+    }
+  }
+}
