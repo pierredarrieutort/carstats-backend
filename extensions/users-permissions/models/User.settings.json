@@ -60,7 +60,7 @@
       "configurable": false
     },
     "travels": {
-      "via": "users_permissions_user",
+      "via": "user",
       "collection": "travel"
     }
   }

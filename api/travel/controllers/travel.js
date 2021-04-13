@@ -5,4 +5,15 @@
  * to customize this controller
  */
 
-module.exports = {};
+const atob = require('atob')
+
+module.exports = {
+  async me (ctx) {
+    const { id } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
+    const response = await strapi.query('travel').model.find({
+      user: id,
+    })
+
+    return response.map(({route}) => route)
+  }
+}
