@@ -62,6 +62,10 @@
     "travels": {
       "via": "user",
       "collection": "travel"
+    },
+    "users_global_stat": {
+      "via": "user_id",
+      "model": "users-global-stat"
     }
   }
 }
