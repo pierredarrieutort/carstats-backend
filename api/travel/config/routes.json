@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/travels/me",
+      "handler": "travel.me",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/travels/:id",
       "handler": "travel.findOne",
       "config": {
@@ -44,14 +52,6 @@
       "method": "DELETE",
       "path": "/travels/:id",
       "handler": "travel.delete",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/travels/me",
-      "handler": "travel.me",
       "config": {
         "policies": []
       }
