@@ -10,7 +10,7 @@
  module.exports = {
    async me (ctx) {
      const { id } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
-     const response = await strapi.query('usersGlobalStat').model.find({
+     const response = await strapi.query('users-global-stat').model.find({
        user: id,
      })
 
