@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/users-global-stats/me",
+      "handler": "users-global-stat.me",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/users-global-stats/:id",
       "handler": "users-global-stat.findOne",
       "config": {
