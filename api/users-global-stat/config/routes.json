@@ -26,6 +26,14 @@
     },
     {
       "method": "GET",
+      "path": "/users-global-stats/leaderboard",
+      "handler": "users-global-stat.leaderboard",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/users-global-stats/:id",
       "handler": "users-global-stat.findOne",
       "config": {
