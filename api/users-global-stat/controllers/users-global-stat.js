@@ -12,7 +12,7 @@ module.exports = {
   async me(ctx) {
     const { id } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
 
-    return await strapi.query('users-global-stat').find({
+    return await strapi.query('users-global-stat').findOne({
       user_id: id,
     })
   },
