@@ -22,10 +22,6 @@
       "min": 0,
       "default": 0
     },
-    "vMoy": {
-      "type": "float",
-      "min": 0
-    },
     "totalDistance": {
       "type": "integer",
       "min": 0,
