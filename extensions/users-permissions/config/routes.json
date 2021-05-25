@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/auth/local",
+      "handler": "Auth.register",
+      "config": {
+        "policies": [
+          "createUserGlobalStats"
+        ],
+        "prefix": "",
+        "description": "Login a user using the identifiers email and password",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    }
+  ]
+}
