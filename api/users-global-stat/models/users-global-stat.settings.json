@@ -12,10 +12,9 @@
   },
   "attributes": {
     "user_id": {
-      "unique": true,
+      "via": "users_global_stat",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "users_global_stat"
+      "model": "user"
     },
     "vMax": {
       "type": "float",

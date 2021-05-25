@@ -66,6 +66,14 @@
     "users_global_stat": {
       "via": "user_id",
       "model": "users-global-stat"
+    },
+    "friendship": {
+      "via": "owner",
+      "model": "friendship"
+    },
+    "users": {
+      "via": "friend",
+      "model": "friendship"
     }
   }
 }

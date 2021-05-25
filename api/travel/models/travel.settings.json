@@ -12,9 +12,9 @@
   },
   "attributes": {
     "user": {
+      "via": "travels",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "travels"
+      "model": "user"
     },
     "route": {
       "type": "json"
