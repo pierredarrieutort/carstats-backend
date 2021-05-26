@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "POST",
-      "path": "/auth/local",
+      "path": "/auth/local/register",
       "handler": "Auth.register",
       "config": {
         "policies": [
