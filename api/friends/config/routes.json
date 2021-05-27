@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/friendships",
-      "handler": "friendship.find",
+      "path": "/friends",
+      "handler": "friends.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/friendships/count",
-      "handler": "friendship.count",
+      "path": "/friends/count",
+      "handler": "friends.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/friendships/:id",
-      "handler": "friendship.findOne",
+      "path": "/friends/:id",
+      "handler": "friends.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/friendships",
-      "handler": "friendship.create",
+      "path": "/friends",
+      "handler": "friends.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/friendships/:id",
-      "handler": "friendship.update",
+      "path": "/friends/:id",
+      "handler": "friends.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/friendships/:id",
-      "handler": "friendship.delete",
+      "path": "/friends/:id",
+      "handler": "friends.delete",
       "config": {
         "policies": []
       }

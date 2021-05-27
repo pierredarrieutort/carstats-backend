@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "friends",
+  "info": {
+    "name": "friendships",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "friend_requester": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "friendRequests"
+    },
+    "user_target": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "receivedFriends"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "accepted",
+        "blocked",
+        "ignored"
+      ],
+      "default": "pending",
+      "required": true
+    }
+  }
+}
