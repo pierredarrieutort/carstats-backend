@@ -36,11 +36,12 @@ module.exports = {
 async function friendRequestParser (list, statusFilter) {
   return await Promise.all(list
     .filter(({ status }) => statusFilter ? status === statusFilter : true)
-    .map(async ({ status, friend_requester, user_target }) => {
+    .map(async ({ id: friendshipID, status, friend_requester, user_target }) => {
       const { id: fromId, username: fromUsername } = await strapi.query('user', 'users-permissions').findOne({ id: friend_requester })
       const { id: toId, username: toUsername } = await strapi.query('user', 'users-permissions').findOne({ id: user_target })
 
       return {
+        friendshipID,
         from: {
           id: fromId,
           username: fromUsername
