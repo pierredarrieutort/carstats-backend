@@ -26,8 +26,7 @@
       "enum": [
         "pending",
         "accepted",
-        "blocked",
-        "ignored"
+        "blocked"
       ],
       "default": "pending",
       "required": true

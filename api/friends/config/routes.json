@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/friends/me",
+      "handler": "friends.me",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/friends/:id",
       "handler": "friends.findOne",
       "config": {
