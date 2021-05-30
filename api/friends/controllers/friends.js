@@ -41,7 +41,6 @@ async function friendRequestParser (list, statusFilter) {
       const { id: toId, username: toUsername } = await strapi.query('user', 'users-permissions').findOne({ id: user_target })
 
       return {
-        status,
         from: {
           id: fromId,
           username: fromUsername
