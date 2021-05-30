@@ -15,14 +15,14 @@ module.exports = {
 
     const myFriends = await friendRequestParser(groupedFriends, 'accepted')
     const pendingRequests = await friendRequestParser(receivedFriends, 'pending')
-    const blockUsers = await friendRequestParser(groupedFriends, 'blocked')
+    const blockedUsers = await friendRequestParser(groupedFriends, 'blocked')
     const sendedRequests = await friendRequestParser(friendRequests, 'pending')
 
     ctx.send({
       myFriends,
+      sendedRequests,
       pendingRequests,
-      blockUsers,
-      sendedRequests
+      blockedUsers
     })
   }
 }
