@@ -26,6 +26,14 @@ module.exports = {
     })
   },
 
+  async createById (ctx) {
+    const target = await strapi.query('user', 'users-permissions').findOne({ id: ctx.request.body.id })
+
+    ctx.request.body.username = target.username
+    console.log(ctx.request.body.username)
+    return this.createByUsername(ctx)
+  },
+
   async createByUsername (ctx) {
     const targetUsername = ctx.request.body.username
     const { id: requesterID } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))

@@ -42,6 +42,14 @@
     },
     {
       "method": "POST",
+      "path": "/friendships/create-by-id",
+      "handler": "friendships.createById",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/friendships/create-by-username",
       "handler": "friendships.createByUsername",
       "config": {
