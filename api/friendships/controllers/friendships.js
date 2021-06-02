@@ -93,7 +93,49 @@ module.exports = {
   },
 
   async blockByUsername (ctx) {
+    const targetUsername = ctx.request.body.username
+    const { id: requesterID } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
+    const target = await strapi.query('user', 'users-permissions').findOne({ username: targetUsername })
 
+    if (!target) {
+      return ctx.throw(404, { message: 'User not found' })
+    } else if (requesterID === target.id) {
+      // User can't block himself
+      return ctx.throw(403, { message: 'You can\'t block yourself' })
+    }
+
+    // Group all friendships
+    const groupedFriends = [...target.friendRequests, ...target.receivedFriends]
+
+    const existingFriendship = groupedFriends.find(({ friendRequester, userTarget }) => userTarget === requesterID || friendRequester === requesterID)
+
+    if (existingFriendship) {
+      if (existingFriendship.status === 'blocked') {
+        if (existingFriendship.lastActionAuthor === requesterID) {
+          return ctx.send({ message: 'User already blocked' })
+        } else {
+          return ctx.throw(404, { message: 'User not found' })
+        }
+      } else {
+        await strapi.query('friendships').update(
+          { id: existingFriendship.id },
+          {
+            status: 'blocked',
+            lastActionAuthor: requesterID
+          })
+
+        return ctx.send({ message: `${ctx.request.body.username} is now blocked` })
+      }
+    } else {
+      await strapi.query('friendships').create({
+        status: 'blocked',
+        lastActionAuthor: requesterID,
+        friendRequester: requesterID,
+        userTarget: target.id
+      })
+
+      return ctx.send({ message: `${ctx.request.body.username} has been blocked` })
+    }
   }
 }
 

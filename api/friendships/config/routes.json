@@ -49,17 +49,17 @@
       }
     },
     {
-      "method": "PUT",
-      "path": "/friendships/:id",
-      "handler": "friendships.update",
+      "method": "POST",
+      "path": "/friendships/block-by-username",
+      "handler": "friendships.blockByUsername",
       "config": {
         "policies": []
       }
     },
     {
-      "method": "DELETE",
-      "path": "/friendships/block-by-username",
-      "handler": "friendships.blockByUsername",
+      "method": "PUT",
+      "path": "/friendships/:id",
+      "handler": "friendships.update",
       "config": {
         "policies": []
       }
