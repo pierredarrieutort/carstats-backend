@@ -27,56 +27,52 @@ module.exports = {
   },
 
   async createViaID (ctx) {
-    const { requesterID } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
-    const userTarget = await strapi.query('user', 'users-permissions').findOne({ username: ctx.request.body.username })
+    const { id: requesterID } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
+    const target = await strapi.query('user', 'users-permissions').findOne({ username: ctx.request.body.username })
 
-    if (!userTarget) {
+    if (!target) {
       unableToGetUser(ctx)
+    } else if (requesterID === target.id) {
+      // User can request himself as friend
+      return ctx.throw(403, { message: 'You can\'t add yourself as friend' })
     }
 
-    // Group all userTarget friendships
-    const groupedFriends = [...userTarget.friendRequests, ...userTarget.receivedFriends]
+    // Group all friendships
+    const groupedFriends = [...target.friendRequests, ...target.receivedFriends]
 
 
-    const friendshipChecker = groupedFriends
-      .find(({ friendRequester, userTarget }) => userTarget === requesterID || friendRequester === requesterID)
+    const existingFriendship = groupedFriends.find(({ friendRequester, userTarget }) => userTarget === requesterID || friendRequester === requesterID)
 
-    if (friendshipChecker) {
-      switch (friendshipChecker.status) {
+    if (existingFriendship) {
+      switch (existingFriendship.status) {
         case 'blocked':
           // If the Requester blocked target user, he's able to pass friendship to pending (new friend request)
-          if (friendshipChecker.lastActionAuthor.id === requesterID) {
-            // TODO Update friendship status to PENDING
+          if (existingFriendship.lastActionAuthor === requesterID) {
+            console.log('TODO Update friendship status to PENDING')
           } else {
             unableToGetUser(ctx)
           }
           break
         case 'pending':
-          if (friendshipChecker.lastActionAuthor.id === requesterID) {
-            // TODO Create message : the request already sended
+          if (existingFriendship.lastActionAuthor === requesterID) {
+            console.log('TODO Create message : the request already sended')
           } else {
-            // TODO Update friendship status to ACCEPTED
+            console.log('TODO Update friendship status to ACCEPTED')
           }
           break
         case 'accepted':
-            // TODO ctx returns message : already friends
+          console.log('TODO ctx returns message : already friends')
           break
       }
 
     } else {
-      // TODO Create friendship relation : requester, target, status = pending
+      console.log('TODO Create friendship relation : requester, target, status = pending')
     }
-
-
-
-    ctx.send(groupedFriends)
-    console.log('b', userTarget)
-    // function to check friendship status
   }
 }
 
 function unableToGetUser (ctx) {
-  return ctx.throw(404, { message: 'No user found' })
+  return ctx.throw(404, { message: 'User not found' })
 }
 
 /**
