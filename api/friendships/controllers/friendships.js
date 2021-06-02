@@ -15,7 +15,7 @@ module.exports = {
 
     const myFriends = await friendRequestParser(groupedFriends, 'accepted')
     const pendingRequests = await friendRequestParser(receivedFriends, 'pending')
-    const blockedUsers = await friendRequestParser(groupedFriends, 'blocked')
+    const blockedUsers = await friendRequestParser(groupedFriends, 'blocked', id)
     const sendedRequests = await friendRequestParser(friendRequests, 'pending')
 
     ctx.send({
@@ -145,9 +145,13 @@ module.exports = {
  * @param {String=} statusFilter OPTIONAL - Pass wanted filtering status in Strapi friendships.
  * @returns {Array} Parsed array of objects.
  */
-async function friendRequestParser (list, statusFilter) {
+async function friendRequestParser (list, statusFilter, requesterID) {
   return await Promise.all(list
-    .filter(({ status }) => statusFilter ? status === statusFilter : true)
+    .filter(({ status, lastActionAuthor }) => requesterID
+      ? requesterID === lastActionAuthor
+      : true
+      && status === statusFilter
+    )
     .map(async ({ id: friendshipID, status, friendRequester, userTarget }) => {
       const { id: fromId, username: fromUsername } = await strapi.query('user', 'users-permissions').findOne({ id: friendRequester })
       const { id: toId, username: toUsername } = await strapi.query('user', 'users-permissions').findOne({ id: userTarget })
