@@ -58,8 +58,8 @@
     },
     {
       "method": "DELETE",
-      "path": "/friendships/block-user-by-username",
-      "handler": "friendships.blockbyUsername",
+      "path": "/friendships/block-by-username",
+      "handler": "friendships.blockByUsername",
       "config": {
         "policies": []
       }
