@@ -155,10 +155,14 @@ module.exports = {
  */
 async function friendRequestParser (list, statusFilter, requesterID) {
   return await Promise.all(list
-    .filter(({ status, lastActionAuthor }) => requesterID
-      ? requesterID === lastActionAuthor
-      : true
-      && status === statusFilter
+    .filter(({ status, lastActionAuthor }) => {
+      // If request have been blocked by other user he can't see he's blocked
+      if (status === 'blocked' && requesterID !== lastActionAuthor) {
+        return false
+      }
+
+      return status === statusFilter
+    }
     )
     .map(async ({ id: friendshipID, status, friendRequester, userTarget }) => {
       const { id: fromId, username: fromUsername } = await strapi.query('user', 'users-permissions').findOne({ id: friendRequester })
