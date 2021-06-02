@@ -42,8 +42,8 @@
     },
     {
       "method": "POST",
-      "path": "/friendships/create-via-username",
-      "handler": "friendships.createViaUsername",
+      "path": "/friendships/create-by-username",
+      "handler": "friendships.createbyUsername",
       "config": {
         "policies": []
       }
@@ -52,6 +52,14 @@
       "method": "PUT",
       "path": "/friendships/:id",
       "handler": "friendships.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/friendships/block-user-by-username",
+      "handler": "friendships.blockbyUsername",
       "config": {
         "policies": []
       }

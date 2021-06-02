@@ -26,7 +26,7 @@ module.exports = {
     })
   },
 
-  async createViaUsername (ctx) {
+  async createByUsername (ctx) {
     const targetUsername = ctx.request.body.username
     const { id: requesterID } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
     const target = await strapi.query('user', 'users-permissions').findOne({ username: targetUsername })
@@ -90,6 +90,10 @@ module.exports = {
 
       return ctx.send({ message: 'Friend request has been sent' })
     }
+  }
+
+  async blockByUsername (ctx) {
+    
   }
 }
 
