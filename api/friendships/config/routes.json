@@ -65,6 +65,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/friendships/is-friend",
+      "handler": "friendships.isFriend",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/friendships/:id",
       "handler": "friendships.update",

@@ -30,7 +30,7 @@ module.exports = {
     const target = await strapi.query('user', 'users-permissions').findOne({ id: ctx.request.body.id })
 
     ctx.request.body.username = target.username
-    console.log(ctx.request.body.username)
+
     return this.createByUsername(ctx)
   },
 
@@ -144,6 +144,17 @@ module.exports = {
 
       return ctx.send({ message: `${ctx.request.body.username} has been blocked` })
     }
+  },
+
+  async isFriend (ctx) {
+    const { id } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
+    const { friendRequests, receivedFriends } = await strapi.query('user', 'users-permissions').findOne({ id })
+    const groupedFriends = [...friendRequests, ...receivedFriends]
+
+    const myFriends = await friendRequestParser(groupedFriends, 'accepted')
+    const friendsIDs = [...new Set(myFriends.map(({ from, to }) => [from.id, to.id]).flat())]
+
+    ctx.send(friendsIDs.includes(ctx.request.body.id))
   }
 }
 
