@@ -26,7 +26,7 @@ module.exports = {
     })
   },
 
-  async createViaID (ctx) {
+  async createViaUsername (ctx) {
     const targetUsername = ctx.request.body.username
     const { id: requesterID } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
     const target = await strapi.query('user', 'users-permissions').findOne({ username: targetUsername })

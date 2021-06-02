@@ -42,8 +42,8 @@
     },
     {
       "method": "POST",
-      "path": "/friendships/create-via-id",
-      "handler": "friendships.createViaID",
+      "path": "/friendships/create-via-username",
+      "handler": "friendships.createViaUsername",
       "config": {
         "policies": []
       }
