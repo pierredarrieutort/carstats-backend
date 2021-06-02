@@ -11,12 +11,12 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "friend_requester": {
+    "friendRequester": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "friendRequests"
     },
-    "user_target": {
+    "userTarget": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "receivedFriends"
@@ -30,6 +30,11 @@
       ],
       "default": "pending",
       "required": true
+    },
+    "lastActionAuthor": {
+      "private": true,
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

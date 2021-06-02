@@ -41,6 +41,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/friends/create-via-id",
+      "handler": "friends.createViaID",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/friends/:id",
       "handler": "friends.update",

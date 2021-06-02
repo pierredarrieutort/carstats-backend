@@ -68,11 +68,11 @@
       "model": "users-global-stat"
     },
     "friendRequests": {
-      "via": "friend_requester",
+      "via": "friendRequester",
       "collection": "friends"
     },
     "receivedFriends": {
-      "via": "user_target",
+      "via": "userTarget",
       "collection": "friends"
     }
   }
