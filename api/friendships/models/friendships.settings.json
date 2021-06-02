@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "friends",
+  "collectionName": "friendships",
   "info": {
     "name": "friendships",
     "description": ""

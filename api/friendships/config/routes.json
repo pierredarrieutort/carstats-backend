@@ -2,64 +2,64 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/friends",
-      "handler": "friends.find",
+      "path": "/friendships",
+      "handler": "friendships.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/friends/count",
-      "handler": "friends.count",
+      "path": "/friendships/count",
+      "handler": "friendships.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/friends/me",
-      "handler": "friends.me",
+      "path": "/friendships/me",
+      "handler": "friendships.me",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/friends/:id",
-      "handler": "friends.findOne",
+      "path": "/friendships/:id",
+      "handler": "friendships.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/friends",
-      "handler": "friends.create",
+      "path": "/friendships",
+      "handler": "friendships.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/friends/create-via-id",
-      "handler": "friends.createViaID",
+      "path": "/friendships/create-via-id",
+      "handler": "friendships.createViaID",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/friends/:id",
-      "handler": "friends.update",
+      "path": "/friendships/:id",
+      "handler": "friendships.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/friends/:id",
-      "handler": "friends.delete",
+      "path": "/friendships/:id",
+      "handler": "friendships.delete",
       "config": {
         "policies": []
       }

@@ -69,11 +69,11 @@
     },
     "friendRequests": {
       "via": "friendRequester",
-      "collection": "friends"
+      "collection": "friendships"
     },
     "receivedFriends": {
       "via": "userTarget",
-      "collection": "friends"
+      "collection": "friendships"
     }
   }
 }

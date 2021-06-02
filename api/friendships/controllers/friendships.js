@@ -27,11 +27,12 @@ module.exports = {
   },
 
   async createViaID (ctx) {
+    const targetUsername = ctx.request.body.username
     const { id: requesterID } = JSON.parse(atob(ctx.headers.authorization.split('.')[1].replace('-', '+').replace('_', '/')))
-    const target = await strapi.query('user', 'users-permissions').findOne({ username: ctx.request.body.username })
+    const target = await strapi.query('user', 'users-permissions').findOne({ username: targetUsername })
 
     if (!target) {
-      unableToGetUser(ctx)
+      return ctx.throw(404, { message: 'User not found' })
     } else if (requesterID === target.id) {
       // User can request himself as friend
       return ctx.throw(403, { message: 'You can\'t add yourself as friend' })
@@ -48,31 +49,48 @@ module.exports = {
         case 'blocked':
           // If the Requester blocked target user, he's able to pass friendship to pending (new friend request)
           if (existingFriendship.lastActionAuthor === requesterID) {
-            console.log('TODO Update friendship status to PENDING')
+            await strapi.query('friendships').update(
+              { id: existingFriendship.id },
+              {
+                status: 'pending',
+                lastActionAuthor: requesterID
+              })
+
+            return ctx.send({ message: 'Friend request has been sent' })
           } else {
-            unableToGetUser(ctx)
+            return ctx.throw(404, { message: 'User not found' })
           }
           break
         case 'pending':
           if (existingFriendship.lastActionAuthor === requesterID) {
-            console.log('TODO Create message : the request already sended')
+            return ctx.send({ message: 'Friend request is already pending' })
           } else {
-            console.log('TODO Update friendship status to ACCEPTED')
+            await strapi.query('friendships').update(
+              { id: existingFriendship.id },
+              {
+                status: 'accepted',
+                lastActionAuthor: requesterID
+              })
+
+            return ctx.send({ message: `${ctx.request.body.username} is now your friend` })
           }
           break
         case 'accepted':
-          console.log('TODO ctx returns message : already friends')
+          return ctx.send({ message: `${ctx.request.body.username} is already your friend` })
           break
       }
 
     } else {
-      console.log('TODO Create friendship relation : requester, target, status = pending')
+      await strapi.query('friendships').create({
+        status: 'pending',
+        lastActionAuthor: requesterID,
+        friendRequester: requesterID,
+        userTarget: target.id
+      })
+
+      return ctx.send({ message: 'Friend request has been sent' })
     }
   }
-}
-
-function unableToGetUser (ctx) {
-  return ctx.throw(404, { message: 'User not found' })
 }
 
 /**
