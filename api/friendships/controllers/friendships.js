@@ -90,10 +90,10 @@ module.exports = {
 
       return ctx.send({ message: 'Friend request has been sent' })
     }
-  }
+  },
 
   async blockByUsername (ctx) {
-    
+
   }
 }
 
